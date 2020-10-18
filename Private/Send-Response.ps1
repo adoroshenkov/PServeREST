@@ -19,7 +19,7 @@ function Send-Response {
 	Write-Verbose "Send-ResponseNew| Content type is $($Content.GetType().ToString())"
 	switch($Content.GetType().ToString()){
 		"System.Object[]" { $buffer = $Content }
-		default { $buffer = [System.Text.Encoding]::UTF8.GetBytes($Content) }
+		default { $buffer = [System.Text.Encoding]::UTF8.GetBytes("<HTML><HEAD><meta charset='UTF-8'></HEAD><BODY>$Content</BODY></HTML>") } # Firefox by default use US-ASCII for plain text
 	}
 	
 	$Response.ContentLength64 = $buffer.Length
